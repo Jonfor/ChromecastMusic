@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Play teh music</title>
 
+    <link href="css/normalize.css" type="text/css" rel="stylesheet">
     <link href="css/app.css" type="text/css" rel="stylesheet">
 </head>
 <body>
@@ -15,12 +16,12 @@
     </div>
 <div class="grid">
     <div class="col-1-3">
-            <div id="songList">
+        <div id="song-list-wrapper">
                 <output id="list"></output>
             </div>
         </div>
     <div class="col-2-3">
-            <audio id="player" controls onended="changeSong();"></audio>
+        <audio id="player" autoplay controls onended="changeSong();"></audio>
         </div>
     </div>
 

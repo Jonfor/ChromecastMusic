@@ -10,28 +10,30 @@ function handleFileSelect(evt) {
     // files is a FileList of File objects. List some properties.
     var output = [];
     for (var i = 0, f; f = files[i]; i++) {
-        output.push('<li><strong>', decodeURI(f.name), '</strong></li>');
+        var prepend = "<li id=song" + i + " onclick=changeSong(" + i + ")>";
+        output.push(prepend, '<strong>', decodeURI(f.name), '</strong></li>');
     }
     document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
 
     currSongNum = 0;
+    changeActiveSong(0);
     playSong(files[0]);
 }
 
 function changeSong(nextSongNum) {
     "use strict";
 
-    if (currSongNum >= files.length - 1) {
+    if (currSongNum > files.length - 1) {
         return;
     }
 
-    nextSongNum = nextSongNum || -1;
-
     if (nextSongNum === -1) {
         currSongNum++;
+        changeActiveSong(currSongNum);
         playSong(files[currSongNum]);
     } else {
         currSongNum = nextSongNum;
+        changeActiveSong(currSongNum);
         playSong(files[currSongNum]);
     }
 
@@ -47,6 +49,15 @@ function playSong(song) {
     };
 
     freader.readAsDataURL(song);
+}
+
+function changeActiveSong(newActiveSongNum) {
+    "use strict";
+    var active = document.querySelector("[class=active]");
+    if (active) {
+        active.removeAttribute("class");
+    }
+    document.getElementById("song" + newActiveSongNum).setAttribute("class", "active");
 }
 
 document.getElementById('files').addEventListener('change', handleFileSelect);
