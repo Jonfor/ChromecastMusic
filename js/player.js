@@ -23,15 +23,19 @@ function handleFileSelect(evt) {
 function changeSong(nextSongNum) {
     "use strict";
 
-    if (currSongNum > files.length - 1) {
+    // Playlist has ended
+    if (currSongNum >= files.length - 1) {
+        currSongNum = 0;
         return;
     }
 
+    // Play next song in sequence
     if (nextSongNum === undefined) {
         currSongNum++;
         changeActiveSong(currSongNum);
         playSong(files[currSongNum]);
     } else {
+        // User selected a song
         currSongNum = nextSongNum;
         changeActiveSong(currSongNum);
         playSong(files[currSongNum]);
