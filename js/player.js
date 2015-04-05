@@ -27,7 +27,7 @@ function changeSong(nextSongNum) {
         return;
     }
 
-    if (nextSongNum === -1) {
+    if (nextSongNum === undefined) {
         currSongNum++;
         changeActiveSong(currSongNum);
         playSong(files[currSongNum]);
